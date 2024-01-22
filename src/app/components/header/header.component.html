@@ -1,0 +1,21 @@
+<!-- header.component.html -->
+<nav>
+    <div class="brand">Tech Active</div>
+    <div class="info-container">
+      <div class="group-info text-default-color">
+        Total Groups Created: {{totalGroupsCreated}}, Total Groups Updated: {{totalGroupsUpdated}}
+      </div>
+      <div class="user-profile" [ngClass]="{ 'active': isDropdownOpen }">
+        <div class="dropdown">
+          <!-- Display user name and email in the dropdown -->
+          <p>{{ userInfo.name }}</p>
+          <p>{{ userInfo.email }}</p>
+        </div>
+        <div class="profile-photo" (click)="toggleDropdown()">
+          <!-- Add an image tag with the user's profile photo -->
+          <img [src]="userInfo.photo" alt="Profile Photo">
+        </div>
+      </div>
+    </div>
+  </nav>
+  

@@ -1,0 +1,27 @@
+/* create-group-dialog.component.scss */
+
+.title {
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .row {
+   
+    margin-bottom: 10px; /* Adjust the margin as needed */
+  }
+  
+  .col {
+    margin-right: 10px; /* Adjust the margin as needed */
+  }
+  
+  .member-row {
+    margin-left: 20px; /* Adjust the margin as needed */
+  }
+  
+  .add-member-button {
+    align-self: flex-end;
+  }
+  
+  
+  .close-icon{
+    align-self: flex-end;
+  }
