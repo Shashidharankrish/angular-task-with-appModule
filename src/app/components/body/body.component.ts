@@ -9,6 +9,7 @@ import { PopupComponent } from '../popup/popup.component';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { EMPTY, Observable, first } from 'rxjs';
 import { selectGroups } from '../../store/group/group.selector';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-body',
@@ -23,31 +24,34 @@ import { selectGroups } from '../../store/group/group.selector';
   ],
 })
 export class BodyComponent implements OnInit {
+ 
   groups$: Observable<Group[]>;
   expandedGroup: Group | null = null;
   columnsToDisplay = ['serialNumber', 'name', 'createdTime', 'actions'];
   dataSource: MatTableDataSource<Group>;
   searchTerm: string = '';
   filteredGroups: any[] = [];
-
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
   constructor( private dialog: MatDialog, private store: Store) {
     this.groups$ = store.select(selectGroups);
-    this.dataSource = new MatTableDataSource<Group>();
+    this.dataSource = new MatTableDataSource<Group>([]);
+    this.dataSource.sort = this.sort;
    
   }
 
 
 
 ngOnInit(): void {
-  this.store.dispatch(GroupActions.loadGroups());
-  this.loadGroups();
- this.groups$.pipe(
-    first(), 
-    switchMap(() => this.groups$) 
-  ).subscribe(groups => {
-    
-  });
-}
+    this.store.dispatch(GroupActions.loadGroups());
+    this.loadGroups();
+    this.groups$.pipe(
+      first(), 
+      switchMap(() => this.groups$) 
+    ).subscribe(groups => {
+      this.dataSource.data = groups;
+       this.dataSource.sort = this.sort;
+    });
+  }
 
 
 
@@ -73,8 +77,6 @@ ngOnInit(): void {
 
   deleteGroup(_id: string) {
   this.store.dispatch(GroupActions.deleteGroup({ _id }));
-
-  
   this.groups$.pipe(
     first(), 
     switchMap(() => this.groups$) 
@@ -117,8 +119,8 @@ applySearchFilter(): void {
         const dateMatch = !searchTermLower || (createdTime && createdTime.toDateString().toLowerCase().includes(searchTermLower));
         return nameMatch || dateMatch;
       });
-
       this.dataSource.data = this.filteredGroups;
+      this.dataSource.sort = this.sort; 
     })
   ).subscribe();
 }

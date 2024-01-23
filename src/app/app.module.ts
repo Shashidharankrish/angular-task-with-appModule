@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { groupReducer } from './store/group/group.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
 ];
@@ -59,7 +60,7 @@ const routes: Routes = [
     StoreModule.forFeature('group', groupReducer),
     EffectsModule.forRoot([GroupEffects]),
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,MatSortModule
 
   ],
   providers: [],
