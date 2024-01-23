@@ -51,6 +51,7 @@ saveGroup(): void {
       adminName: this.adminName,
       members: this.members,
       isModified: this.isModified,
+      createdTime: new Date(),
     };
 
     if (this.mode === GroupDialogMode.Edit) {

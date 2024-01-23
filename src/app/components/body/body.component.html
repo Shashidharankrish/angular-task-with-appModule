@@ -5,7 +5,7 @@
   <button mat-raised-button (click)="openCreateGroupDialog()">Create Group</button>
   <div class="search-container">
     <mat-form-field appearance="outline">
-      <input matInput placeholder="Search" [(ngModel)]="searchTerm" (input)="applySearchFilter()" #searchInput>
+      <input matInput placeholder="Search" [(ngModel)]="searchTerm" (input)="applySearchFilter()">
     </mat-form-field>
   </div>
 </div>
@@ -20,6 +20,11 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header class="group-column"> Group Name </th>
     <td mat-cell *matCellDef="let group" (click)="editGroup(group)"> {{group.groupName}} </td>
   </ng-container>
+  <ng-container matColumnDef="createdTime" class="medium-column">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header class="created-time-column"> Created Time </th>
+  <td mat-cell *matCellDef="let group">{{ group.createdTime | date: 'medium' }}</td>
+</ng-container>
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef class="action-column"> Actions </th>
     <td mat-cell *matCellDef="let group">
@@ -54,8 +59,8 @@
 
 
 
-  <tr mat-header-row *matHeaderRowDef="['serialNumber', 'name', 'actions']"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['serialNumber', 'name', 'actions'];" class="element-row" [class.expanded]="row == expandedGroup" ></tr>
+  <tr mat-header-row *matHeaderRowDef="['serialNumber', 'name', 'createdTime', 'actions']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['serialNumber', 'name', 'createdTime', 'actions'];" class="element-row" [class.expanded]="row == expandedGroup" ></tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" class="expanded-row" [class.expanded]="row == expandedGroup"></tr>
 
 </table>

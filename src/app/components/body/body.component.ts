@@ -25,7 +25,7 @@ import { selectGroups } from '../../store/group/group.selector';
 export class BodyComponent implements OnInit {
   groups$: Observable<Group[]>;
   expandedGroup: Group | null = null;
-  columnsToDisplay = ['serialNumber', 'name', 'actions'];
+  columnsToDisplay = ['serialNumber', 'name', 'createdTime', 'actions'];
   dataSource: MatTableDataSource<Group>;
   searchTerm: string = '';
   filteredGroups: any[] = [];
@@ -105,17 +105,26 @@ ngOnInit(): void {
     ).subscribe();
   }
 
-  applySearchFilter(): void {
-    this.groups$.pipe(
-  tap(groups => {
-    this.filteredGroups = groups.filter(group => {
-      const groupName = group.groupName || '';
-      return groupName.toLowerCase().includes(this.searchTerm.toLowerCase());
-    });
-  })
-).subscribe();
 
-  }
+applySearchFilter(): void {
+  this.groups$.pipe(
+    tap(groups => {
+      this.filteredGroups = groups.filter(group => {
+        const groupName = group.groupName || '';
+        const createdTime = group.createdTime ? new Date(group.createdTime) : null;
+        const searchTermLower = this.searchTerm.toLowerCase();
+        const nameMatch = groupName.toLowerCase().includes(searchTermLower);
+        const dateMatch = !searchTermLower || (createdTime && createdTime.toDateString().toLowerCase().includes(searchTermLower));
+        return nameMatch || dateMatch;
+      });
+
+      this.dataSource.data = this.filteredGroups;
+    })
+  ).subscribe();
+}
+
+
+  
 
   toggleExpansion(group: Group): void {
   this.expandedGroup = this.expandedGroup === group ? null : group;

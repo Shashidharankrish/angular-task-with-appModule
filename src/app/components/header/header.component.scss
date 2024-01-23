@@ -11,7 +11,7 @@ nav {
   
   .brand {
     font-size: 2.5rem;
-    color: #086a0f; /* Specify the brand color */
+    color: #086a0f;
   }
   
   .info-container {
@@ -20,20 +20,20 @@ nav {
   }
   
   .group-info {
-    margin-right: 20px; /* Adjust margin as needed */
-    white-space: nowrap; /* Prevent line break */
+    margin-right: 20px; 
+    white-space: nowrap; 
     font-family: Arial, Helvetica, sans-serif;
-    color: black; /* Specify the default color for other text */
+    color: black;
   }
   
   .text-default-color {
-    color: black; /* Specify the default color for other text */
+    color: black;
   }
   
   .user-profile {
     display: flex;
     align-items: center;
-    position: relative; /* Make the container relative for absolute positioning */
+    position: relative; 
   }
   
   .profile-photo {
@@ -47,8 +47,8 @@ nav {
   
   .dropdown {
     display: none;
-    position: absolute; /* Change position to absolute */
-    top: 100%; /* Position under the photo */
+    position: absolute; 
+    top: 100%;
     right: 0;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -62,7 +62,7 @@ nav {
     cursor: pointer;
   }
   
-  /* Show the dropdown when it's open */
+  
   .user-profile.active .dropdown {
     display: block;
   }

@@ -5,5 +5,6 @@ export interface Group {
   groupName: string;
   adminName: string;
    members: Member[];
+   createdTime: Date;
   isModified?: boolean;
 }
