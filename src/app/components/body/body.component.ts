@@ -50,6 +50,9 @@ ngOnInit(): void {
     ).subscribe(groups => {
       this.dataSource.data = groups;
        this.dataSource.sort = this.sort;
+       if (groups && groups.length > 0) {
+          this.expandedGroup = groups[0];
+       }
     });
   }
 
