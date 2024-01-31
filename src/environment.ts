@@ -1,6 +1,6 @@
 
 export const environment = {
     production: false,
-    API_URL: 'https://crudcrud.com/api/63cf927528404d879db66ad90cba5f35',
+    API_URL: 'https://crudcrud.com/api/52bd828971bb4c58965a918b82949f11',
   };
   
